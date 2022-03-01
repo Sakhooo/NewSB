@@ -1,0 +1,110 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="Halyk.kz/Layout/Navbar.html">
+<div layout:fragment="site_content">
+    <div class="container">
+        <form th:action="@{'/halyk/saveItem'}" method="post">
+            <input name="id" type="hidden" th:value="${item.id}">
+            <div class="form-group">
+                <label th:text="#{label.name}">
+                    Name:
+                </label >
+                <input type="text" class="form-control" name="name" th:value="${item!=null?item.name:''}">
+            </div>
+            <div class="form-group">
+                <label th:text="#{label.description}">
+                    Description:
+                </label>
+                <input type="text" class="form-control" name="description" th:value="${item!=null?item.description:'NO description'}" >
+            </div>
+            <div class="form-group">
+                <label th:text="#{label.price}">
+                    Price:
+                </label>
+                <input type="number" class="form-control" name="price" th:value="${item!=null?item.price:0}" max="1000000" min="0" >
+            </div>
+            <div class="form-group">
+                <label th:text="#{label.amount}">
+                    Amount:
+                </label>
+                <input type="number" class="form-control" name="amount" th:value="${item!=null?item.amount:0}">
+            </div>
+            <div class="form-group">
+                <label th:text="#{label.pictureURL}">
+                    Picture URL:
+                </label>
+                <input type="text" class="form-control" name="picture" th:value="${item!=null?item.pictureURL:'no URL'}">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-success" th:text="#{button.save}"> Save Item </button>
+                <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#delete" th:text="#{button.delete}">Delete</button>
+            </div>
+        </form>
+
+        <div class="modal fade" id="delete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form th:action="@{'/halyk/deleteItem'}" method="post">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel" th:text="#{label.addNewItem}" ></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div>
+                            <input name="id" type="hidden" th:value="${item.id}">
+                            <div class="modal-body">
+                                <h5 th:text="#{massage.confirm}"></h5>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-danger" th:text="#{button.delete}">Delete</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{button.close}">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="row mt-5" id="#categoriesID">
+            <div class="col-6 offset-3">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr th:each="cat: ${item.categories}">
+                        <form th:action="@{'/halyk/unAssigncategory'}" method="post">
+                            <input type="hidden" th:value="${item.id}" name="item_id">
+                            <input type="hidden" th:value="${cat.id}" name="category_id">
+                        <td th:text="${cat.name}"></td>
+                        <td width="10%">
+                            <button class="btn btn-danger"> - </button>
+                        </td>
+                        </form>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+
+        <div class="row mt-5">
+            <div class="col-6 offset-3">
+                <table class="table table-striped">
+                    <tbody>
+                    <tr th:each="cat: ${categories}">
+                        <form th:action="@{'/halyk/assigncategory'}" method="post">
+                            <input type="hidden" th:value="${item.id}" name="item_id">
+                            <input type="hidden" th:value="${cat.id}" name="category_id">
+                        <td th:text="${cat.name}">
+                        </td>
+                        <td width="10%">
+                            <button class="btn btn-success"> + </button>
+                        </td>
+                        </form>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+</html>

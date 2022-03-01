@@ -1,0 +1,24 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="Halyk.kz/Layout/Navbar.html">
+<div layout:fragment="site_content">
+    <div class="row">
+        <div class="col mt-5" th:each="it : ${items}">
+            <div class="card ml-5" style="width: 18rem;">
+                <img th:src="${it.pictureURL}" class="card-img-top rounded" alt="...">
+                <div class="card-body  ">
+                    <h5 class="card-title" th:text="${it.name}"></h5>
+                    <h4 class="text-primary" th:text="${it.price}"></h4>
+                    <p class="card-text" th:text="${it.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a -th:href="@{'/halyk/details/' + ${it.id}}" class="btn btn-success" th:text="#{button.details}">Details</a>
+<!--                    <form th:action="@{'/halyk/addToBasket'+${it.id}}" method="Get">-->
+<!--                        <input type="hidden" name="id" th:value="${it.id}">-->
+<!--                        <button class="btn btn-dark">add To Basket</button>-->
+<!--                    </form>-->
+                    <a th:onclick="'basket('+${it.id}+')'" class="btn btn-dark" th:text="#{button.addToBasket}">add To Basket</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

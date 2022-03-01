@@ -1,0 +1,35 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="Layout/lesson2/Main.html">
+<div layout:fragment="site_content">
+    <div class="container">
+        <div>
+            <form th:action="@{''}" method="">
+                <button class="btn btn-success">+ADD New Task</button>
+            </form>
+        </div>
+        <div class="table">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Is Completed</th>
+                    <th scope="col">Details</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="ts:${task}">
+                    <th scope="row" th:text="${ts.id}"></th>
+                    <td th:text="${ts.name}"></td>
+                    <td th:text="${ts.deadlineDate}"></td>
+                    <td th:text="${ts.completed?'Yes':'No'}"></td>
+                    <td> <a th:href="@{'/lesson2/getID/'+ ${ts.id}}" class="btn btn-success">DETAILS</a> </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</html>

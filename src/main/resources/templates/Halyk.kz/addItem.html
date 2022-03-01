@@ -1,0 +1,107 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="Halyk.kz/Layout/Navbar.html">
+<div layout:fragment="site_content">
+    <div class="container">
+        <div>
+            <div>
+                <button class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#exampleModal" th:text="#{button.addNewItem}">+ADD New Task</button>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="card ml-5" style="width: 18rem;" th:each="it : ${items}">
+                <img th:src="${it.pictureURL}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${it.name}"></h5>
+                    <h4 class="text-primary" th:text="${it.price}"></h4>
+                    <p class="card-text" th:text="${it.description}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a th:href="@{'/halyk/details/' + ${it.id}}" class="btn btn-success" th:text="#{button.details}">Details</a>
+                </div>
+            </div>
+        </div>
+        <div class="table">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">description</th>
+                    <th scope="col">price</th>
+                    <th scope="col">amount</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="it : ${items}">
+                    <th scope="row" th:text= "${it.id}"></th>
+                    <td th:text= "${it.name}"></td>
+                    <td th:text= "${it.description}" ></td>
+                    <td th:text= "${it.amount}"></td>
+                    <td> <a href="#" class="btn btn-success">DETAILS</a> </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- Modal -->
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" th:text="#{label.addNewItem}" >ADD New Item</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div>
+                        <form th:action="@{'/halyk/addItem'}" method="post">
+                            <div class="modal-body">
+                                <div>
+                                    <label th:text="#{label.name}">
+                                        Name:
+                                    </label>
+                                    <input class="form-control" type="text" name="name">
+                                </div>
+                                <div>
+                                    <label th:text="#{label.description}">
+                                        Description:
+                                    </label>
+                                    <input class="form-control" type="text" name="description">
+                                </div>
+                                <div>
+                                    <label th:text="#{label.price}">
+                                        Price:
+                                    </label>
+                                    <input class="form-control" type="number" max="10000000" min="0" name="price">
+                                </div>
+                                <div>
+                                    <label th:text="#{label.amount}">
+                                        Amount:
+                                    </label>
+                                    <input class="form-control" type="number" name="amount" max="100" min="0">
+                                </div>
+                                <div>
+                                    <label th:text="#{label.pictureURL}">
+                                        Picture URL:
+                                    </label>
+                                    <input class="form-control" type="text" name="picture">
+                                </div>
+                                <div>
+                                    <label>
+                                        <select class="form-control" name="category_id">
+                                            <option th:each="cat: ${categories}" th:text="${cat.name}" th:value="${cat.id}">
+                                            </option>
+                                        </select>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-primary" th:text="#{button.save}">Save changes</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" th:text="#{button.close}">Close</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>Chapter</title>
+    <link th:href ="@{/bootstrap-4.0.0/dist/css/bootstrap.min.css}"  type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <div>
+            <form th:action="@{'lesson1/lesson'}" method="get">
+                <button class="btn-success">lesson1</button>
+            </form>
+        </div>
+        <br>
+        <div>
+            <form th:action="@{'/lesson2/tasks'}" method="get">
+                <button class="btn-success">lesson2</button>
+            </form>
+        </div>
+        <br>
+        <div>
+            <form th:action="@{'/lesson3/Posts'}" method="get">
+                <button class="btn-success">lesson3</button>
+            </form>
+        </div>
+        <br>
+        <div>
+            <form th:action="@{'/halyk/'}" method="get">
+                <button class="btn-success">HalykShop</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

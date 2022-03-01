@@ -1,0 +1,26 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="Halyk.kz/Layout/Navbar.html">
+<div layout:fragment="site_content">
+    <div class="row mt-5">
+        <div class="col-6 offset-3 ">
+            <h1> Hello <span th:text="${currentUser.fullName}"></span> </h1>
+        </div>
+        <div class="row">
+            <div class="col-6 offset-3">
+                <img th:src="@{'/halyk/viewphoto/' + ${currentUser.userAvatar}}" class="my-3">
+            </div>
+            <form th:action="@{'/halyk/uploadavatar'}" method="post" enctype="multipart/form-data">
+                <div class="custom-file">
+                    <input type="file" class="form-control" id = "customFile" name="user_ava">
+                    <label class="form-label" for="customFile"></label>
+                    <button class="btn btn-success" th:text="#{button.upLoadFile}"></button>
+                </div>
+            </form>
+        </div>
+
+
+
+    </div>
+</div>
+</html>

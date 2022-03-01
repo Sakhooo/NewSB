@@ -1,0 +1,63 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="Halyk.kz/Layout/Navbar.html"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<div layout:fragment="site_content">
+    <div class="container">
+            <input name="id" type="hidden" th:value="${item.id}">
+            <div class="form-group">
+                <label th:text="#{label.name}">
+                    Name:
+                </label >
+                <input type="text" class="form-control plain-text" th:value="${item!=null?item.name:''}" readonly>
+            </div>
+            <div class="form-group">
+                <label th:text="#{label.description}">
+                    Description:
+                </label>
+                <input type="text" class="form-control plain-text"  th:value="${item!=null?item.description:'NO description'}" readonly >
+            </div>
+            <div class="form-group">
+                <label th:text="#{label.price}">
+                    Price:
+                </label>
+                <input type="number" class="form-control plain-text" th:value="${item!=null?item.price:0}" readonly >
+            </div>
+            <div class="form-group">
+                <label th:text="#{label.amount}">
+                    Amount:
+                </label>
+                <input type="number" class="form-control plain-text" th:value="${item!=null?item.amount:0}" readonly>
+            </div>
+            <div class="form-group">
+                <label th:text="#{label.pictureURL}">
+                    Picture URL:
+                </label>
+                <input type="text" class="form-control plain-text" th:value="${item!=null?item.pictureURL:'no URL'}" readonly>
+            </div>
+            <div class="form-group">
+                <a th:href="@{'/halyk/editItem/' + ${item.id}}" class="btn btn-success" sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MODERATOR')" th:text="#{button.edit}"></a>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-6 offset-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <td th:text="#{label.Category}"></td>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                <tr th:each="cat: ${item.categories}">
+                                        <input type="hidden" th:value="${item.id}" name="item_id">
+                                        <input type="hidden" th:value="${cat.id}" name="category_id">
+                                        <td th:text="${cat.name}"></td>
+                                </tr>
+                            </tbody>
+                    </table>
+                </div>
+
+        </div>
+    </div>
+</div>
+</html>

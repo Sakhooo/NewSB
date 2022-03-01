@@ -1,0 +1,43 @@
+<html lang="en" xmlns:th="https://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="Layout/lesson2/Main.html">
+<div layout:fragment="site_content">
+    <div class="container">
+        <div>
+            <form th:action="@{''}" method="post">
+                <div class="form-group">
+                    <label>
+                        Task Name:
+                    </label>
+                    <input type="text" class="form-control" name="name" th:value="${task.name!=null?task.name:''}">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Task Description:
+                    </label>
+
+                    <textarea name="description" th:text="${task.description}"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        Task Deadline Date:
+                    </label>
+                    <input type="date"  th:value="${task.deadlineDate}" name="date">
+                </div>
+                <div class="form-group">
+                    <label>
+                        Completed:
+                    </label>
+                    <select name="completed">
+                        <option value="true" >YES </option>
+                        <option value="false">NO</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success"> new Item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</html>
