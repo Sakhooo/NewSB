@@ -9,28 +9,30 @@
                 <th scope="col">URL</th>
                 <th scope="col">Category</th>
                 <th scope="col">Name</th>
-                <th scope="col">Amount</th>
                 <th scope="col">Price</th>
-                <th scope="col">Edit</th>
                 <th scope="col">Delete</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="it:${session.item!=null?session.item.entrySet():null}">
-                <td><img th:src="${it!=null?it.getValue().get(0).getPictureURL:'no URL'}" style="width: 30%" alt=""></td>
-                <td th:text="${it!=null?it.getValue().get(0).getCategory():'no Category'}"></td>
-                <td th:text="${it!=null?it.getValue().get(0).getName:'no Name'}"></td>
-                <td th:text="${it!=null?it.getValue().get(0).getPrice():'0'}"></td>
-                <td></td>
-                <td>
-                    <form th:action="@{/deleteItem/{id}(id=${it.getKey()})}" method="post">
-                        <button class="btn btn-dark">Delete</button>
-                    </form>
-                </td>
-            </tr>
+            <div th:if="${basket}!=null">
+                <tr  th:each="ses : ${basket}">
+                    <td><img th:src="${ses.pictureURL}" style="width: 30%"> </td>
+                    <td th:each="cat: ${ses.categories}" th:text="${cat.name}"></td>
+                    <td th:text="${ses.name}"></td>
+                    <td th:text="${ses.price}"></td>
+                    <td>
+                        <div>
+                            <form th:action="@{'/halyk/deleteBasket'}" method="post">
+                                <input type="hidden" name="id" th:value="${ses.id}">
+                                <button class="btn btn-danger">delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </div>
             </tbody>
         </table>
-        <script th:src="@{/static/js/jquery-3.6.0.min.js}" ></script>
+<!--        <script th:src="@{/static/js/jquery-3.6.0.min.js}" ></script>-->
     </div>
 </div>
 </html>

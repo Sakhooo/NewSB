@@ -3,19 +3,24 @@ package com.example.newsb.halykShop.services.impl;
 import com.example.newsb.halykShop.entities.Category;
 import com.example.newsb.halykShop.entities.ShopItems;
 import com.example.newsb.halykShop.repositories.CategoryRepository;
-import com.example.newsb.halykShop.repositories.ShopItemRepository;
+import com.example.newsb.halykShop.repositories.PhoneItemRepository;
 import com.example.newsb.halykShop.services.ItemServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.awt.print.Pageable;
 import java.util.List;
+import java.util.Locale;
+
 @Service
 public class ItemServicesImpl implements ItemServices {
     @Autowired
-    private ShopItemRepository shopItemRepository;
+    private PhoneItemRepository shopItemRepository;
 
-    @Autowired
-    private CategoryRepository categoryRepository;
+
 
     @Override
     public ShopItems addItem(ShopItems item) {
@@ -42,30 +47,17 @@ public class ItemServicesImpl implements ItemServices {
         return shopItemRepository.save(item);
     }
 
-    @Override
-    public Category addCategory(Category category) {
-        return categoryRepository.save(category);
-    }
 
     @Override
-    public List<Category> getAllCategory() {
-        return categoryRepository.findAll();
+    public List<ShopItems> listAll(String keyword) {
+        if (keyword!=null){
+            return shopItemRepository.ListAll(keyword.toLowerCase(Locale.ROOT));
+        }
+        return shopItemRepository.findAll();
     }
 
-    @Override
-    public Category getCategory(Long id) {
-        return categoryRepository.getOne(id);
-    }
 
-    @Override
-    public void deleteCategory(Category category) {
-        categoryRepository.delete(category);
-    }
 
-    @Override
-    public Category saveCategory(Category category) {
-        return categoryRepository.save(category);
-    }
 
 //    @Override
 //    public List<ShopItems> getCat(List<Category> category) {

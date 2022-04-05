@@ -1,6 +1,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security"
+>
 <head>
     <meta charset="UTF-8">
     <title>HalykShop</title>
@@ -65,7 +66,7 @@
                             Language
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarCategory" >
-                            <li class="nav-item" th:each="cat: ${categories}" ><a th:href="@{'/halyk/category?category='+${cat.name}}" th:text="${cat.name}" ></a>
+                            <li class="nav-item" th:each="cat: ${categories}" ><a th:href="@{'/halyk/'+${cat.id}}" th:text="${cat.name}" ></a>
                             </li>
                         </ul>
                     </li>
@@ -73,15 +74,17 @@
                         <a class="nav-link disabled">Disabled</a>
                     </li>
                 </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-                <li class="nav-item">
+
+<!--                <li class="nav-item">-->
                     <form th:action="@{'/halyk/gobasket'}" method="get">
-                        <button class="btn btn-success">Go TO Basket</button>
+                        <button class="btn btn-success">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket-fill" viewBox="0 0 16 16">
+                                <path d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717L5.07 1.243zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3z"/>
+                            </svg>
+                            Basket
+                        </button>
                     </form>
-                </li>
+<!--                </li>-->
             </div>
         </div>
     </nav>

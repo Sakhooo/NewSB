@@ -7,4 +7,5 @@ public interface UserServices extends UserDetailsService {
     Users getUserByEmail(String email);
     Users crateUser(Users user);
     Users saveUsers(Users users);
+
 }

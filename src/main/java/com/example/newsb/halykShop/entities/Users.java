@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -30,8 +31,21 @@ public class Users {
     @Column(name = "full_name")
     private String fullName;
 
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "phone_number")
+    private long phoneNumber;
+
     @Column(name = "user_avatar")
     private String userAvatar;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "state_region")
+    private String stateRegion;
+
 
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Roles> roles;
